@@ -133,43 +133,4 @@ static	int			gnl_read_file(int fd, char *heap, char **stack, char **line)
 ** a minus one (-1) if needed.
 **
 ** If there is something in the stack (because we are using a static variable),
-** we verify that there is a newline. If not, we allocate memory for the heap,
-** and we read the file.
-**
-** When the reading of the file ends, we will free the heap (we're not gonna
-** use it anymore), and we check for the value of ret (if it's 1 or -1, return
-** that, if the stack is empty, return 0). If neither of these conditions are
-** valid, we assing line to the value of the stack, free the stack, and return 1
-**
-** A good read about file descriptors:
-** http://www.bottomupcs.com/file_descriptors.xhtml
-*/
-
-int					get_next_line(int const fd, char **line)
-{
-	static char		*stack[MAX_FD];
-	char			*heap;
-	int				ret;
-	int				i;
-
-	if (!line || (fd < 0 || fd >= MAX_FD) || (read(fd, stack[fd], 0) < 0) \
-		|| !(heap = (char *)malloc(sizeof(char) * BUFF_SIZE + 1)))
-		return (-1);
-	if (stack[fd])
-		if (gnl_verify_line(&stack[fd], line))
-			return (1);
-	i = 0;
-	while (i < BUFF_SIZE)
-		heap[i++] = '\0';
-	ret = gnl_read_file(fd, heap, &stack[fd], line);
-	free(heap);
-	if (ret != 0 || stack[fd] == NULL || stack[fd][0] == '\0')
-	{
-		if (!ret && *line)
-			*line = NULL;
-		return (ret);
-	}
-	*line = stack[fd];
-	stack[fd] = NULL;
-	return (1);
-}
+** we verify that there
