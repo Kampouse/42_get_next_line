@@ -1,1 +1,18 @@
-jaleman
+# This is a Python function that takes in a list of numbers
+# and returns the largest prime number in the list
+
+def largest\_prime(numbers):
+# Initialize the largest prime to None
+largest\_prime = None
+
+# Loop through each number in the list
+for num in numbers:
+# If the number is less than 2, it cannot be prime
+# so we continue to the next number
+if num < 2:
+continue
+
+
+
+
+As you can see, each line or block of code is accompanied by a comment that explains what it does. This makes it much easier for other developers to understand the code and modify it if necessary.
