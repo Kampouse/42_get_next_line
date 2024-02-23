@@ -1,4 +1,2 @@
-0123
-01234567
-0123456789AEBCDF
-
+def greet(name):
+  print("Hello, " + name + "!")
